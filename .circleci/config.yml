@@ -10,8 +10,7 @@ jobs:
       - run:
           name: update auth & key details
           command: |
-            sed -i "s/aws-access-key/${AWS_ACCESS_KEY}/g" terraform.tfvars
-            sed -i "s/aws-secret-key/${AWS_SECRET_KEY}/g" terraform.tfvars
+            echo -e access_key:${AWS_ACCESS_KEY}'\n'secret_key:${AWS_SECRET_KEY}
             echo ${TERRAFORM_SSH_PUBLIC_KEY} > key.pub 
       - run:
           name: terraform init & plan
