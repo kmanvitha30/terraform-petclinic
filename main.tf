@@ -23,9 +23,9 @@ module "eks" {
 }
 
 module "securitygroups" {
-  source = "./modules/securitygroups"
-  vpc_id = module.vpc.vpc-id
-  vpc_cidr_block = var.vpc_cidr_block 
+  source         = "./modules/securitygroups"
+  vpc_id         = module.vpc.vpc-id
+  vpc_cidr_block = var.vpc_cidr_block
 }
 
 module "rds" {
