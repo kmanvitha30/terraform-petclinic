@@ -42,7 +42,7 @@ variable "eks_worker_disk_size" {
 }
 
 variable "db_engine" {
-  description = "The database engine to use"
+  description = "Database engine to use"
 }
 
 variable "db_engine_version" {
