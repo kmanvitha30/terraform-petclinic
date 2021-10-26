@@ -1,0 +1,62 @@
+version: 2.1
+
+jobs:
+  plan-apply:
+    working_directory: ~/petclinic-terraform
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: update auth & key details
+          command: |
+            sed -i -E 's/access-key-value/${AWS_ACCESS_KEY_ID}/g;s/secret-key-value/${AWS_SECRET_ACCESS_KEY}/g' terraform.tfvars
+            echo ${TERRAFORM_SSH_PUBLIC_KEY} > key.pub 
+      - run:
+          name: terraform init & plan
+          command: |
+            terraform init -input=false
+            terraform plan -out tfapply -var-file terraform.tfvars
+      - persist_to_workspace:
+          root: ~/petclinic-terraform
+          paths:
+            - .
+  apply:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    working_directory: ~/petclinic-terraform
+    steps:
+      - attach_workspace:
+          at: ~/petclinic-terraform
+      - run:
+          name: terraform apply
+          command: |
+            terraform apply -auto-approve tfapply
+      - persist_to_workspace:
+          root: ~/petclinic-terraform
+          paths:
+            - .
+  destroy:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    working_directory: ~/petclinic-terraform
+    steps:
+      - attach_workspace:
+          at: ~/petclinic-terraform
+      - run:
+          name: terraform destroy
+          command: |
+            terraform destroy -auto-approve 
+
+workflows:
+  plan_approve_apply:
+    jobs:
+      - plan-apply
+      - apply:
+          type: approval
+          requires:
+            - plan-apply
+      - destroy:
+          type: approval
+          requires:
+            - apply
