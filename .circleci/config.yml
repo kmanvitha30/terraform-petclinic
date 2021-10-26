@@ -52,11 +52,17 @@ workflows:
   plan_approve_apply:
     jobs:
       - plan-apply
-      - apply:
+      - apply-approve:
           type: approval
           requires:
             - plan-apply
-      - destroy:
+      - apply:
+          requires:
+            - apply-approve
+      - destroy-approve:
           type: approval
           requires:
             - apply
+      - destroy:
+          requires:
+            - destroy-approve
