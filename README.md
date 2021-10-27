@@ -54,7 +54,7 @@ git clone https://github.com/kmanvitha30/terraform-petclinic.git
 cd terraform-petclinic/
 ```
 
-2. Update the files key.pub and terraform.tfvars with the respective values.
+2. Update the files key.pub and terraform.tfvars with the respective values and makesure the bucket "petclinic-remotestate" to save the terraform statefile exists prior running the below commands. 
 
 3. Execute the .tf files
 ```
