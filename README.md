@@ -56,19 +56,14 @@ cd terraform-petclinic/
 
 2. Update the files key.pub and terraform.tfvars with the respective values.
 
-3. Export AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as environment variables.
-```
-export AWS_ACCESS_KEY_ID="<access_key_value>"
-export AWS_SECRET_ACCESS_KEY="<secret_key_value>"
-```
-4. Execute the .tf files
+3. Execute the .tf files
 ```
 terraform init
 terraform plan -out tfapply
 terraform apply -auto-approve tfapply
 ```
 
-5. To destroy the infra
+4. To destroy the infra
 ```
 terraform destroy -auto-approve
 ```
