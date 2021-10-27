@@ -47,7 +47,7 @@ sudo yum install git
 git --version
 ```
 
-## Usage:
+## To Run Locally:
 1. Clone the git repository and make terraform-petclinic as current working directory.
 ```
 git clone https://github.com/kmanvitha30/terraform-petclinic.git
