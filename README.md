@@ -1,5 +1,6 @@
 The above terraform scripts are used to deploy resources required for petclinic application to run in AWS cloud.
 
+![alt text](https://github.com/kmanvitha30/terraform-petclinic/blob/master/terraform_pipeline.png)
 
 ## Resources Created:
 ### VPC Module
