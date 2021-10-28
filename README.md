@@ -63,7 +63,7 @@ terraform plan -out tfapply
 terraform apply -auto-approve tfapply
 ```
 
-4. To destroy the infra
+4. To destroy the created infra
 ```
 terraform destroy -auto-approve
 ```
